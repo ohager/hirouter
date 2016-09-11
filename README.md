@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ohager/hiroute.svg?branch=master)](https://travis-ci.org/ohager/hiroute)
+
 # hirouter
 React Router wrapper for better routing experience
 
