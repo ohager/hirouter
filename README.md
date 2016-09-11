@@ -18,7 +18,7 @@ const router = <Router history={history}>
 render( <HiRouter router={router} />, document.getElementById('root') )
 ```
 
-Inside _ProductContainer_ you shall access
+Inside _ProductListContainer_ you shall access
 
 ```jsx
 class ProductListContainer extends React.Component {

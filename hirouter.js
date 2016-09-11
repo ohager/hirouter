@@ -1,6 +1,5 @@
 var React = require('React');
-const analyzePath = require('./analyzePath');
-
+const createRouteFunction = require('./createRouteFunction');
 
 const HiRouter = React.createClass({
 
@@ -9,33 +8,31 @@ const HiRouter = React.createClass({
 	},
 
 	childContextTypes: {
-		test: React.PropTypes.array
+		nav: React.PropTypes.array
 	},
 
 	getInitialState: function () {
 		return {
-			test: []
+			nav: []
 		}
 	},
 
 	getChildContext: function () {
 		return {
-			test: this.state.test
+			nav: this.state.nav
 		}
 	},
 
 	createRouteFunction : function(path, alias){
 		const suffix = "goTo";
 		let name = alias;
+		const analyzed = analyzePath(path);
 		if(!name){
-			name = this.createNiceNameFromPath(path);
+			name = analyzed.joinedTokens;
 		}
 
 		return {
-			name: `${suffix}${name}`,
-			func: function(){
-
-			}
+			[`${suffix}${name}`]: (...args) => console.log("args",args)
 		}
 	},
 
@@ -49,7 +46,7 @@ const HiRouter = React.createClass({
 				path: c.props.path
 			}
 		});
-		this.setState({test: paths});
+		this.setState({nav: paths});
 	},
 
 	render: function () {
