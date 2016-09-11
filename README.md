@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/ohager/hiroute.svg?branch=master)](https://travis-ci.org/ohager/hiroute)
-[![codecov](https://codecov.io/gh/ohager/hiroute/branch/master/graph/badge.svg)](https://codecov.io/gh/ohager/hiroute)
+[![Build Status](https://travis-ci.org/ohager/hirouter.svg?branch=master)](https://travis-ci.org/ohager/hirouter)
+[![codecov](https://codecov.io/gh/ohager/hirouter/branch/master/graph/badge.svg)](https://codecov.io/gh/ohager/hirouter)
+
 
 # hirouter
 React Router wrapper for better routing experience
