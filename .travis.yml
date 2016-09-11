@@ -3,6 +3,8 @@ node_js:
   - "node"
 install:
   - npm install -g codecov
-  - npm install
+cache:
+  directories:
+  - node_modules
 after-success:
   - bash <(curl -s https://codecov.io/bash)

@@ -1,4 +1,4 @@
-const analyzePath = require('../analyzePath');
+const analyzePath = require('../modules/analyzePath');
 describe("nice name from path function", () => {
 
 	it("creates empty name", () => {

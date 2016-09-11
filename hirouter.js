@@ -1,5 +1,5 @@
 var React = require('react');
-const createRouteFunction = require('./createRouteFunction');
+const createRouteFunction = require('./modules/createRouteFunction');
 
 const HiRouterOptionsShape = {
 	suffix : React.PropTypes.string,
