@@ -4,6 +4,7 @@ const Router = require('react-router').Router;
 const createHistory = require('react-router').createMemoryHistory;
 const Route = require('react-router').Route;
 const HiRouter = require('../hirouter');
+const defaultRoutingImpl = require('../modules/defaultRoutingImpl');
 
 const SingleTestComponent = React.createClass({
 
@@ -45,6 +46,8 @@ const MultipleTestComponent = React.createClass({
 function testRoutingImpl(url) {
 	return url;
 }
+
+
 
 describe("HiRouter", () => {
 
