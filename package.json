@@ -1,8 +1,8 @@
 {
-  "name": "hiroute",
+  "name": "hirouter",
   "version": "0.0.1",
   "description": "Wrapper for react-router's Route component for easy imperative routing",
-  "main": "hiroute.js",
+  "main": "hirouter.js",
   "scripts": {
     "test-debug": "node %NODE_DEBUG_OPTION% node_modules/jest/bin/jest.js",
     "test-local": "node node_modules/jest/bin/jest.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ohager/hiroute.git"
+    "url": "git+https://github.com/ohager/hirouter.git"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -23,9 +23,9 @@
   "author": "O. Häger",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ohager/hiroute/issues"
+    "url": "https://github.com/ohager/hirouter/issues"
   },
-  "homepage": "https://github.com/ohager/hiroute#readme",
+  "homepage": "https://github.com/ohager/hirouter#readme",
   "devDependencies": {
     "babel-jest": "^15.0.0",
     "babel-polyfill": "^6.13.0",
