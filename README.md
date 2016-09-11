@@ -27,15 +27,22 @@ Inside _ProductListContainer_ you shall access
 ```jsx
 class ProductListContainer extends React.Component {
 	constructor(){
-		super()
+		super() 
 	}
 	
-	// ...
+	handleSelectedProduct(id){
+		context.nav.goToProduct(id);
+	}
 	
 	render(){
-		return <ProductList onSelectedProduct={context.goToProduct} />
+		return <ProductList onSelectedProduct={handleSelectedProduct.bind(this)} />
 	}
 }
+
+ProductListContainer.contextTypes = {
+  nav: React.PropTypes.object
+};
+
 ```
 
 
