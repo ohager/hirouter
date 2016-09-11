@@ -6,6 +6,14 @@ function routingImpl(url){
 
 describe("create Route functions", () => {
 
+	it("for empty path", () => {
+		const path = "/";
+		const result = createRouteFunction(routingImpl, path);
+
+		expect(result.goToIndex).toBeDefined();
+		expect(result.goToIndex()).toBe("/");
+	});
+
 	it("without variables", () => {
 		const path = "/test";
 		const result = createRouteFunction(routingImpl, path);
@@ -35,6 +43,28 @@ describe("create Route functions", () => {
 
 		expect(result.goToOrderProductDetails).toBeDefined();
 		expect(result.goToOrderProductDetails(1,"deadbeef")).toBe("/order/1/product/deadbeef/details");
+	});
+
+	it("with options #1", () => {
+		const path = "/order/:id";
+		const opts = {
+			suffix: "geheZu",
+			alias : "Bestellung"
+		};
+		const result = createRouteFunction(routingImpl, path, opts );
+
+		expect(result.geheZuBestellung).toBeDefined();
+		expect(result.geheZuBestellung(1)).toBe("/order/1");
+	});
+
+	it("with options #2", () => {
+		const opts = {
+			defaultPath : "Home"
+		};
+		const result = createRouteFunction(routingImpl, "/", opts );
+
+		expect(result.goToHome).toBeDefined();
+		expect(result.goToHome()).toBe("/");
 	});
 
 });

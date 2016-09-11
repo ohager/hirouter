@@ -10,14 +10,21 @@ function createMountPathFunction(fn, pathInfo){
 
 }
 
-function createRouteFunction(routingImpl, path, alias){
-	const suffix = "goTo";
-	let name = alias;
+const defaultOpts = {
+	suffix : "goTo",
+	defaultPath : "Index",
+	alias: ""
+};
+
+function createRouteFunction(routingImpl, path, opts = defaultOpts){
+	opts = Object.assign({},defaultOpts,opts);
+
+	let name = opts.alias;
 	const pathInfo = analyzePath(path);
 	if(!name){
-		name = pathInfo.joinedTokens;
+		name = pathInfo.joinedTokens.length === 0 ? opts.defaultPath : pathInfo.joinedTokens;
 	}
-	const funcName = `${suffix}${name}`;
+	const funcName = `${opts.suffix}${name}`;
 	return {
 		[funcName]: createMountPathFunction.call(null, routingImpl, pathInfo )
 	}
