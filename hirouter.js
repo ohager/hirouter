@@ -1,4 +1,4 @@
-var React = require('React');
+var React = require('react');
 const createRouteFunction = require('./createRouteFunction');
 
 const HiRouter = React.createClass({
