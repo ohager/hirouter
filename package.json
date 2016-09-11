@@ -4,7 +4,7 @@
   "description": "Wrapper for react-router's Route component for easy imperative routing",
   "main": "hirouter.js",
   "scripts": {
-    "test-debug": "node %NODE_DEBUG_OPTION% node_modules/jest/bin/jest.js",
+    "test-debug": "node %NODE_DEBUG_OPTION% node_modules/jest/bin/jest.js --runInBand",
     "test-local": "node node_modules/jest/bin/jest.js",
     "test": "node node_modules/jest/bin/jest.js && codecov"
   },
@@ -33,9 +33,9 @@
     "babel-preset-react": "^6.11.1",
     "codecov": "^1.0.1",
     "jest": "^15.1.1",
-    "react": "15.2.1",
-    "react-addons-test-utils": "15.2.1",
-    "react-dom": "15.2.1",
-    "react-router": "^2.7.0"
+    "react": "15.3.1",
+    "react-dom": "15.3.1",
+    "react-router": "^2.7.0",
+    "react-test-renderer": "^15.3.1"
   }
 }

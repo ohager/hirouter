@@ -1,19 +1,40 @@
 var React = require('react');
 const createRouteFunction = require('./createRouteFunction');
 
+const HiRouterOptionsShape = {
+	suffix : React.PropTypes.string,
+	defaultPath : React.PropTypes.string,
+	alias: React.PropTypes.string
+};
+
+
+
 const HiRouter = React.createClass({
 
 	propTypes: {
-		router: React.PropTypes.element.isRequired
+		router: React.PropTypes.element.isRequired,
+		options : React.PropTypes.shape( HiRouterOptionsShape )
+	},
+
+
+	getDefaultProps : function(){
+		return {
+			options : {
+				suffix : "goTo",
+				defaultPath : "Index",
+				alias: "",
+				routingImpl: (url) => url
+			}
+		}
 	},
 
 	childContextTypes: {
-		nav: React.PropTypes.array
+		nav: React.PropTypes.object
 	},
 
 	getInitialState: function () {
 		return {
-			nav: []
+			nav: {}
 		}
 	},
 
@@ -23,30 +44,18 @@ const HiRouter = React.createClass({
 		}
 	},
 
-	createRouteFunction : function(path, alias){
-		const suffix = "goTo";
-		let name = alias;
-		const analyzed = analyzePath(path);
-		if(!name){
-			name = analyzed.joinedTokens;
-		}
-
-		return {
-			[`${suffix}${name}`]: (...args) => console.log("args",args)
-		}
-	},
-
 	componentWillMount: function () {
-		console.log("version", React.version);
 
 		const routerElement = this.props.router;
-		var paths = routerElement.props.children.map((c)=> {
-			return {
-				componentName: c.props.component.displayName,
-				path: c.props.path
-			}
-		});
-		this.setState({nav: paths});
+		const components = [].concat(routerElement.props.children);
+		const options = this.props.options;
+
+		const nav = components.reduce( (p,c) => {
+			const r = createRouteFunction(options.routingImpl,c.props.path, options);
+			return Object.assign(p, r);
+		} , {});
+
+		this.setState({nav: nav});
 	},
 
 	render: function () {
