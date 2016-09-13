@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ohager/hirouter.svg?branch=master)](https://travis-ci.org/ohager/hirouter)
 [![codecov](https://codecov.io/gh/ohager/hirouter/branch/master/graph/badge.svg)](https://codecov.io/gh/ohager/hirouter)
-
+[![GetBadges Game](https://ohager-hirouter.getbadges.io/shield/company/ohager-hirouter/user/8773)](https://ohager-hirouter.getbadges.io/?ref=shield-player)
 
 # hirouter
 React Router wrapper for better routing experience
