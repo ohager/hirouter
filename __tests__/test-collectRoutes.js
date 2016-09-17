@@ -20,7 +20,7 @@ Array.prototype.contains = function(str){
 
 describe("Collect Routes", () => {
 
-	it("simple non-recursive test", () => {
+	it("should create correct paths for simple non-recursive routes", () => {
 
 		var history = createHistory("test");
 
@@ -37,7 +37,26 @@ describe("Collect Routes", () => {
 	});
 
 
-	it("more complex recursion test", () => {
+	it("should create correct paths for simple recursive routes", () => {
+
+		var history = createHistory("test");
+
+		const router = <Router history={history}>
+			<Route path = '/path1' component={NodeComponent} >
+				<Route path = '/test' component={LeafComponent} />
+				<Route path = '/test/:id' component={LeafComponent} />
+			</Route>
+		</Router>;
+
+		const paths  = collectRoutes(router);
+
+		expect(paths.length).toBe(3);
+		expect(paths.contains('/path1')).toBeTruthy();
+		expect(paths.contains('/path1/test')).toBeTruthy();
+		expect(paths.contains('/path1/test/:id')).toBeTruthy();
+	});
+
+	it("should create correct paths for complex routing structure", () => {
 
 		var history = createHistory("test");
 
