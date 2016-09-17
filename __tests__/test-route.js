@@ -1,10 +1,26 @@
-const React = require('react');
-const Renderer = require('react-test-renderer');
-const Router = require('react-router').Router;
-const createHistory = require('react-router').createMemoryHistory;
-const Route = require('react-router').Route;
-const HiRouter = require('../hirouter');
-const defaultRoutingImpl = require('../modules/defaultRoutingImpl');
+import React from 'react';
+import Renderer from 'react-test-renderer';
+import {Router, IndexRoute, Route, createMemoryHistory as createHistory} from 'react-router';
+import HiRouter from '../hirouter';
+
+
+const AppComponent = React.createClass({
+    render() {
+        return this.props.children
+    }
+});
+
+const IndexTestComponent = React.createClass({
+	contextTypes: {
+		router: React.PropTypes.any,
+		nav: React.PropTypes.any
+	},
+	render() {
+		return <p>{
+			this.context.nav.goToIndex()
+		}</p>
+	}
+});
 
 const SingleTestComponent = React.createClass({
 
@@ -13,7 +29,7 @@ const SingleTestComponent = React.createClass({
 		nav: React.PropTypes.any
 	},
 
-	render: function () {
+	render() {
 		return <p>{
 			this.context.nav.goToTest()
 		}</p>
@@ -27,7 +43,7 @@ const MultipleTestComponent = React.createClass({
 		nav: React.PropTypes.any
 	},
 
-	componentWillMount : function(){
+	componentWillMount (){
 		const nav = this.context.nav;
 		let urls = [];
 
@@ -37,7 +53,7 @@ const MultipleTestComponent = React.createClass({
 		this.setState( {urls : urls } );
 	},
 
-	render: function () {
+	render() {
 		return <ul>{ this.state.urls.map( (url, index) => <li key={index}>{url}</li>) }</ul>
 	}
 });
@@ -47,8 +63,6 @@ function testRoutingImpl(url) {
 	return url;
 }
 
-
-
 describe("HiRouter", () => {
 
 	it("renders SingleTestComponent returning its own url (single route only)", () => {
@@ -57,7 +71,9 @@ describe("HiRouter", () => {
 		const testOptions = { routingImpl :  testRoutingImpl };
 
 		const router = <Router history={history}>
-			<Route path="test" component={SingleTestComponent}/>
+            <Route path = '/' component={AppComponent} >
+			    <Route path="test" component={SingleTestComponent}/>
+            </Route>
 		</Router>;
 		
 		const tree = Renderer.create(<HiRouter router={router} options={testOptions}/>);
@@ -71,13 +87,34 @@ describe("HiRouter", () => {
 		const testOptions = { routingImpl :  testRoutingImpl };
 
 		const router = <Router history={history}>
-			<Route path="test" component={SingleTestComponent}/>
-			<Route path="test/:id/other" component={MultipleTestComponent}/>
+            <Route path = '/' component={AppComponent} >
+			    <Route path="test" component={SingleTestComponent}/>
+			    <Route path="test/:id/other" component={MultipleTestComponent}/>
+            </Route>
 		</Router>;
 
 		const tree = Renderer.create(<HiRouter router={router} options={testOptions}/>);
 		expect(tree).toMatchSnapshot();
 
 	});
+
+	it("renders IndexTestComponent and returns '/'", () => {
+
+		var history = createHistory("/");
+		const testOptions = { routingImpl :  testRoutingImpl };
+
+		const router = <Router history={history}>
+            <Route path = '/' component={AppComponent} >
+				<Route path="test" component={SingleTestComponent}/>
+			    <Route path="test/:id/other" component={MultipleTestComponent}/>
+            </Route>
+		</Router>;
+
+		const tree = Renderer.create(<HiRouter router={router} options={testOptions}/>);
+		expect(tree).toMatchSnapshot();
+
+	});
+
+
 
 });

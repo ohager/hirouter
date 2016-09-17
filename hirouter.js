@@ -1,13 +1,14 @@
-var React = require('react');
-const createRouteFunction = require('./modules/createRouteFunction');
-const defaultRoutingImpl = require('./modules/defaultRoutingImpl');
+import React from 'react';
+import createRouteFunction from './modules/createRouteFunction';
+import defaultRoutingImpl from './modules/defaultRoutingImpl';
+import collectRoutes from './modules/collectRoutes';
+
 
 const HiRouterOptionsShape = {
 	suffix : React.PropTypes.string,
 	defaultPath : React.PropTypes.string,
 	alias: React.PropTypes.string
 };
-
 
 const HiRouter = React.createClass({
 
@@ -16,7 +17,11 @@ const HiRouter = React.createClass({
 		options : React.PropTypes.shape( HiRouterOptionsShape )
 	},
 
-	getDefaultProps : function(){
+	childContextTypes: {
+		nav: React.PropTypes.object
+	},
+
+	getDefaultProps(){
 		return {
 			options : {
 				suffix : "goTo",
@@ -27,32 +32,31 @@ const HiRouter = React.createClass({
 		}
 	},
 
-	childContextTypes: {
-		nav: React.PropTypes.object
-	},
-
-	getInitialState: function () {
+	getInitialState() {
 		return {
 			nav: {}
 		}
 	},
 
-	getChildContext: function () {
+	getChildContext() {
 		return {
 			nav: this.state.nav
 		}
 	},
 
-	componentWillMount: function () {
+
+
+	componentWillMount() {
 
 		const routerElement = this.props.router;
-		const components = [].concat(routerElement.props.children);
+        const route = routerElement.props.children;
+        const paths = collectRoutes(route);
 		const options = this.props.options;
-		const routingImpl = options.routingImpl.bind(this.props.router);
+		const routingImpl = options.routingImpl.bind(routerElement);
 
-		const nav = components.reduce( (p,c) => {
-			const r = createRouteFunction(routingImpl,c.props.path, options);
-			return Object.assign(p, r);
+		const nav = paths.reduce( (prevObj,path) => {
+			const r = createRouteFunction(routingImpl,path, options);
+			return Object.assign(prevObj, r);
 		} , {});
 
 		this.setState({nav: nav});
