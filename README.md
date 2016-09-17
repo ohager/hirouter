@@ -3,9 +3,15 @@
 [![GetBadges Game](https://ohager-hirouter.getbadges.io/shield/company/ohager-hirouter/user/8773)](https://ohager-hirouter.getbadges.io/?ref=shield-player)
 
 # hirouter
-React Router wrapper for better routing experience
+React Router wrapper for a even better routing experience.
 
-*NOT WORKING YET*
+A first rough version works, able to create convenience routing functions.
+The idea is to keep the urls centralized (on your routers configuration) and using
+functions like _this.context.nav.goToOrder(orderId)_ instead of pushing the URLs manually to the routers
+history (usually like this _this.context.router.push(\`/order/${orderId}\`)_ )
+The neat thing is, that the functions are created automatically, based on your routes.
+
+> note: Currently, only basic nested routes are supported
 
 # objective
 
@@ -44,5 +50,3 @@ ProductListContainer.contextTypes = {
 };
 
 ```
-
-
