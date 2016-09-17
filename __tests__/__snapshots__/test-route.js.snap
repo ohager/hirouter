@@ -1,22 +1,18 @@
-exports[`HiRouter renders IndexTestComponent and returns '/' 1`] = `
-<p>
-  /
-</p>
-`;
+exports[`HiRouter renders IndexTestComponent and returns '/' 1`] = `null`;
 
 exports[`HiRouter renders MultipleTestComponent and returns list of urls (multiple routes) 1`] = `
 <ul>
   <li>
-    test
+    /test
   </li>
   <li>
-    test/100/other
+    /test/100/other
   </li>
 </ul>
 `;
 
 exports[`HiRouter renders SingleTestComponent returning its own url (single route only) 1`] = `
 <p>
-  test
+  /test
 </p>
 `;

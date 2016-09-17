@@ -14,6 +14,9 @@ const TestComponent = React.createClass({
 	}
 });
 
+Array.prototype.contains = function(str){
+	return this.find( (e) => e === str ) !== undefined;
+};
 
 describe("Collect Routes", () => {
 
@@ -22,15 +25,34 @@ describe("Collect Routes", () => {
 		var history = createHistory("test");
 
 		const router = <Router history={history}>
-			<Route path = '/app' component={AppComponent} />
-			<Route path = '/app2' component={AppComponent} />
+			<Route path = '/app' component={TestComponent} />
+			<Route path = '/app2' component={TestComponent} />
 		</Router>;
 
 		const paths  = collectRoutes(router);
 
 		expect(paths.length).toBe(2);
-		expect(paths[0]).toEqual("/app");
-		expect(paths[1]).toEqual("/app2");
+		expect(paths.contains('/app') ).toBeTruthy();
+		expect(paths.contains( '/app2') ).toBeTruthy();
+	});
+
+
+	it("simple recursive test", () => {
+
+		var history = createHistory("test");
+
+		const router = <Router history={history}>
+			<Route path = '/app' component={AppComponent} >
+				<Route path = '/test' component={TestComponent} />
+			</Route>
+		</Router>;
+
+		const paths  = collectRoutes(router);
+
+		expect(paths.length).toBe(2);
+		expect(paths.contains('/app')).toBeTruthy();
+		expect(paths.contains('/app/test')).toBeTruthy();
 	});
 
 });
+

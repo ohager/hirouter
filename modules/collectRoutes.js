@@ -14,12 +14,10 @@ function collectPaths(routes, path='') {
 	let newPath = '';
 	for(let i=0; i<routes.length; ++i){
 		const route = routes[i];
-		newPath += path + (route.path || '');
 		if(route.childRoutes){
-			newPath += collectPaths(route.childRoutes, newPath);
-		}else{
-			newPath += DELIMITER;
+			newPath += collectPaths(route.childRoutes, route.path);
 		}
+		newPath += path + (route.path || '') + DELIMITER;
 	}
 	return newPath;
 
