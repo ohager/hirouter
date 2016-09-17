@@ -15,7 +15,7 @@ function collectPaths(routes, path='') {
 	for(let i=0; i<routes.length; ++i){
 		const route = routes[i];
 		if(route.childRoutes){
-			newPath += collectPaths(route.childRoutes, route.path);
+			newPath += collectPaths(route.childRoutes, path + (route.path || ''));
 		}
 		newPath += path + (route.path || '') + DELIMITER;
 	}
