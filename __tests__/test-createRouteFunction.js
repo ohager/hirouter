@@ -45,7 +45,7 @@ describe("create Route functions", () => {
 		expect(result.goToOrderProductDetails(1,"deadbeef")).toBe("/order/1/product/deadbeef/details");
 	});
 
-	it("with options #1", () => {
+	it("with options #1 (suffix, alias)", () => {
 		const path = "/order/:id";
 		const opts = {
 			suffix: "geheZu",
@@ -57,7 +57,7 @@ describe("create Route functions", () => {
 		expect(result.geheZuBestellung(1)).toBe("/order/1");
 	});
 
-	it("with options #2", () => {
+	it("with options #2 (defaultPath)", () => {
 		const opts = {
 			defaultPath : "Home"
 		};

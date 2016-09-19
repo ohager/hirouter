@@ -49,13 +49,14 @@ const HiRouter = React.createClass({
 	componentWillMount() {
 
 		const routerElement = this.props.router;
-        const route = routerElement.props.children;
-        const paths = collectRoutes(route);
+        const routes = collectRoutes(routerElement.props.children);
 		const options = this.props.options;
 		const routingImpl = options.routingImpl.bind(routerElement);
 
-		const nav = paths.reduce( (prevObj,path) => {
-			const r = createRouteFunction(routingImpl,path, options);
+		const nav = routes.reduce( (prevObj,route) => {
+			const pathStr = route.alias ? route.alias : route.path;
+			// TODO: need to pass the route structure to fucntion creator!
+			const r = createRouteFunction(routingImpl,pathStr, options);
 			return Object.assign(prevObj, r);
 		} , {});
 
