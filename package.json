@@ -18,7 +18,8 @@
   },
   "keywords": [
     "react-router",
-    "react"
+    "react",
+    "router"
   ],
   "author": "O. Häger",
   "license": "MIT",
