@@ -1,5 +1,5 @@
 {
-  "name": "hirouter",
+  "name": "react-hirouter",
   "version": "0.0.1",
   "description": "Wrapper for react-router's Route component for easy imperative routing",
   "main": "hirouter.js",
@@ -19,6 +19,7 @@
   "keywords": [
     "react-router",
     "react",
+    "routing",
     "router"
   ],
   "author": "O. Häger",
