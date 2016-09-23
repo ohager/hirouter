@@ -1,3 +1,4 @@
+import { firstLetterUpperCase } from "./utils";
 const analyzePath = require('./analyzePath');
 
 function createMountPathFunction(fn, pathInfo){
@@ -12,14 +13,13 @@ function createMountPathFunction(fn, pathInfo){
 
 const defaultOpts = {
 	suffix : "goTo",
-	defaultPath : "Index",
-	alias: ""
+	defaultPath : "Index"
 };
 
-function createRouteFunction(routingImpl, path, opts = defaultOpts){
+function createRouteFunction(routingImpl, path, alias, opts = defaultOpts){
 	opts = Object.assign({},defaultOpts,opts);
 
-	let name = opts.alias;
+	let name = firstLetterUpperCase(alias);
 	const pathInfo = analyzePath(path);
 	if(!name){
 		name = pathInfo.joinedTokens.length === 0 ? opts.defaultPath : pathInfo.joinedTokens;

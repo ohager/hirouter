@@ -3,11 +3,9 @@ import createRouteFunction from './modules/createRouteFunction';
 import defaultRoutingImpl from './modules/defaultRoutingImpl';
 import collectRoutes from './modules/collectRoutes';
 
-
 const HiRouterOptionsShape = {
 	suffix : React.PropTypes.string,
-	defaultPath : React.PropTypes.string,
-	alias: React.PropTypes.string
+	defaultPath : React.PropTypes.string
 };
 
 const HiRouter = React.createClass({
@@ -26,7 +24,6 @@ const HiRouter = React.createClass({
 			options : {
 				suffix : "goTo",
 				defaultPath : "Index",
-				alias: "",
 				routingImpl: defaultRoutingImpl
 			}
 		}
@@ -44,8 +41,6 @@ const HiRouter = React.createClass({
 		}
 	},
 
-
-
 	componentWillMount() {
 
 		const routerElement = this.props.router;
@@ -54,9 +49,7 @@ const HiRouter = React.createClass({
 		const routingImpl = options.routingImpl.bind(routerElement);
 
 		const nav = routes.reduce( (prevObj,route) => {
-			const pathStr = route.alias ? route.alias : route.path;
-			// TODO: need to pass the route structure to fucntion creator!
-			const r = createRouteFunction(routingImpl,pathStr, options);
+			const r = createRouteFunction(routingImpl,route.path, route.alias, options);
 			return Object.assign(prevObj, r);
 		} , {});
 

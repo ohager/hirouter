@@ -1,11 +1,4 @@
-function firstLetterUpperCase(s) {
-	return s ?  s[0].toUpperCase() + s.substring(1) : "";
-}
-
-function purgeVarName(v){
-	if(v.length < 2) throw `Invalid variable '${v}'`;
-	return v.substring(1);
-}
+import {purgeVariableName, firstLetterUpperCase} from "./utils";
 
 function analyzePath(path) {
 	const parts = path.split('/');
@@ -15,7 +8,7 @@ function analyzePath(path) {
 	return {
 		path : path,
 		joinedTokens: partsWithoutVars.map( firstLetterUpperCase ).join(''),
-		variables : partsOnlyVars.map( purgeVarName ),
+		variables : partsOnlyVars.map( purgeVariableName ),
 		}
 }
 

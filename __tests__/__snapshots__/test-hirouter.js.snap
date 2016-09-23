@@ -1,10 +1,10 @@
 exports[`HiRouter renders AliasTestComponent and returns list of Urls 1`] = `
 <ul>
   <li>
-    alternative
+    /test
   </li>
   <li>
-    alternative2
+    /test/100/other
   </li>
 </ul>
 `;
