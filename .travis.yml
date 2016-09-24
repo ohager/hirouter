@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "node"
+    - "6"
 notifications:
     webhooks: https://ohager-hirouter.getbadges.io/api/app/webhook/a3be7bc9-46ad-4fff-8763-b11724f52eac
 install:
