@@ -12,4 +12,4 @@ function analyzePath(path) {
 		}
 }
 
-module.exports = analyzePath;
+export default analyzePath;

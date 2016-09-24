@@ -28,7 +28,7 @@ This is a typical routing tree for react-router. Once defined your routes,
 you simply pass the router as parameter to the HiRouter. 
 Using Reacts context declaration enables you to access the created navigation functions. 
 
-```jsx
+```js
 const router = <Router history={history}>
     <Route path="/" component={App}>
         // IndexRoutes are considered also
@@ -49,7 +49,7 @@ render( <HiRouter router={router} />, document.getElementById('root') )
 
 Inside _ProductListContainer_ you can access convenient routing/navigation functions
 
-```jsx
+```js
 class ProductListContainer extends React.Component {
 	constructor(){
 		super() 
@@ -84,7 +84,7 @@ ProductListContainer.contextTypes = {
 
 ## Options
 
-__HiRouter__ allows to some tweaking. 
+__HiRouter__ allows some tweaking. 
 
 Currently, options for function naming but also for routing internals are available.
 Available options are:
@@ -106,7 +106,7 @@ options : {
 Suppose, we configure our HiRouter like this
 
 
-```jsx
+```js
 const router = 
   <Router history={history}>
     <Route path="/" component={App}>

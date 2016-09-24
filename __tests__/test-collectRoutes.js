@@ -1,4 +1,4 @@
-const collectRoutes = require('../modules/collectRoutes');
+import collectRoutes from '../modules/collectRoutes';
 import React from 'react';
 import {Router, Route, createMemoryHistory as createHistory, IndexRoute} from 'react-router';
 

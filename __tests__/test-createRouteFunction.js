@@ -1,4 +1,4 @@
-const createRouteFunction = require('../modules/createRouteFunction');
+import createRouteFunction from '../modules/createRouteFunction';
 
 function routingImpl(url){
 	return url;

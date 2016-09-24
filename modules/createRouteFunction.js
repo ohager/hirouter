@@ -1,5 +1,5 @@
 import { firstLetterUpperCase } from "./utils";
-const analyzePath = require('./analyzePath');
+import analyzePath from './analyzePath';
 
 function createMountPathFunction(fn, pathInfo){
 
@@ -30,4 +30,4 @@ function createRouteFunction(routingImpl, path, alias, opts = defaultOpts){
 	}
 }
 
-module.exports = createRouteFunction;
+export default createRouteFunction;

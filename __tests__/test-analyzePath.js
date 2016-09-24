@@ -1,4 +1,5 @@
-const analyzePath = require('../modules/analyzePath');
+import analyzePath from '../modules/analyzePath';
+
 describe("nice name from path function", () => {
 
 	it("creates empty name", () => {

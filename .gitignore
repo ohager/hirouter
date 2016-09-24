@@ -1,5 +1,7 @@
 node_modules/
 .idea/
 coverage/
+es6/
+lib/
 npm-debug.log
 

@@ -30,7 +30,7 @@ function collectPaths(routes, path='') {
 
 }
 
-module.exports = function(routerElement){
+export default function(routerElement){
 	const routes = createRoutes(routerElement);
 	const pathStr = collectPaths(routes).trim();
 	const pathArray = pathStr.split(DELIMITER);

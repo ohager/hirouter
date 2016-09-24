@@ -3,4 +3,4 @@ function defaultRoutingImpl(url){
 	this.props.history.push(url);
 }
 
-module.exports = defaultRoutingImpl;
+export default defaultRoutingImpl;
