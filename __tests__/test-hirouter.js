@@ -1,7 +1,7 @@
 import React from 'react';
 import Renderer from 'react-test-renderer';
 import {Router, IndexRoute, Route, createMemoryHistory as createHistory} from 'react-router';
-import HiRouter from '../modules/hirouter';
+import {HiRouter} from '../modules/hirouter';
 
 
 const AppComponent = React.createClass({

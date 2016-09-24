@@ -62,4 +62,8 @@ const HiRouter = React.createClass({
 
 });
 
-export default HiRouter;
+// WEIRD!
+// if exports as default it breaks with React, i.e.
+// the React Component is wrapped by an Object holding 'default' prop
+// That's why I explicetly export this guy here! :/
+export {HiRouter}

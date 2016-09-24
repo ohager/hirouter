@@ -1,6 +1,6 @@
 {
   "name": "react-hirouter",
-  "version": "0.0.4",
+  "version": "0.0.4a",
   "description": "A react-router High Order Component for more expressive routing",
   "jsnext:main": "es6/hirouter",
   "main": "lib/hirouter",
