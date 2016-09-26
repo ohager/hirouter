@@ -17,6 +17,9 @@ const defaultOpts = {
 };
 
 function createRouteFunction(routingImpl, path, alias, opts = defaultOpts){
+
+	if(path.indexOf('*') !== -1) return null;
+
 	opts = Object.assign({},defaultOpts,opts);
 
 	let name = firstLetterUpperCase(alias);

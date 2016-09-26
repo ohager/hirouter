@@ -74,4 +74,9 @@ describe("create Route functions", () => {
 		expect(result.goToHome()).toBe("/");
 	});
 
+	it("ignores path with *", () => {
+		const result = createRouteFunction(routingImpl, "/test/*.jpg" );
+		expect(result).toBeNull();
+	});
+
 });

@@ -10,6 +10,35 @@ const AppComponent = React.createClass({
     }
 });
 
+
+const AsteriskTestComponent = React.createClass({
+	contextTypes: {
+		router: React.PropTypes.any,
+		nav: React.PropTypes.any
+	},
+
+	renderFuncNames : function(){
+		const nav = this.context.nav;
+		let elements = [];
+		let i=0;
+		for(let p in nav){
+			if(nav.hasOwnProperty(p)){
+				elements.push(<li key={++i}>{p}</li>)
+			}
+		}
+		return elements;
+	},
+
+	render() {
+
+		return (<p>
+					<ul>
+						{this.renderFuncNames()}
+					</ul>
+				</p>)
+	}
+});
+
 const IndexTestComponent = React.createClass({
 	contextTypes: {
 		router: React.PropTypes.any,
@@ -148,6 +177,25 @@ describe("HiRouter", () => {
             <Route path = '/' component={AppComponent} >
 				<Route path="test" component={SingleTestComponent} alias="alternative"/>
 			    <Route path="test/:id/other" component={AliasTestComponent} alias="alternative2"/>
+            </Route>
+		</Router>;
+
+		const tree = Renderer.create(<HiRouter router={router} options={testOptions}/>);
+		expect(tree).toMatchSnapshot();
+
+	});
+
+
+	it("ignores '*' routes", () => {
+
+		var history = createHistory("/something/other.jpg");
+		const testOptions = { routingImpl :  testRoutingImpl };
+
+		const router = <Router history={history}>
+            <Route path = '/' component={AppComponent} >
+				<Route path="test/*" component={AsteriskTestComponent}/>
+				<Route path="test/*/foo" component={AsteriskTestComponent} alias="SomeName"/>
+				<Route path="**/*.jpg" component={AsteriskTestComponent}/>
             </Route>
 		</Router>;
 

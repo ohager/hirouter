@@ -50,7 +50,7 @@ const HiRouter = React.createClass({
 
 		const nav = routes.reduce( (prevObj,route) => {
 			const r = createRouteFunction(routingImpl,route.path, route.alias, options);
-			return Object.assign(prevObj, r);
+			return r ? Object.assign(prevObj, r) : prevObj;
 		} , {});
 
 		this.setState({nav: nav});
