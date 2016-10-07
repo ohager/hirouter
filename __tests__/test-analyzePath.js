@@ -42,7 +42,16 @@ describe("nice name from path function", () => {
 		const result = analyzePath(path);
 
 		expect(result.joinedTokens).toBe("LabOrderTestDetails");
-		expect(result.variables).toEqual(["id", "testId"]);
+		expect(result.variables).toEqual(["id","testId"]);
+
+	});
+
+	it("creates name considering optional variables", () => {
+		const path = "lab/order/(:id)/test/:testId/details";
+		const result = analyzePath(path);
+
+		expect(result.joinedTokens).toBe("LabOrderTestDetails");
+		expect(result.variables).toEqual(["id","testId"]);
 
 	});
 

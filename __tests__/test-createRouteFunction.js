@@ -74,6 +74,14 @@ describe("create Route functions", () => {
 		expect(result.goToHome()).toBe("/");
 	});
 
+	it("handles optional variables (:foo)", () => {
+		const result = createRouteFunction(routingImpl, "/test/(:id)");
+
+		expect(result.goToTest).toBeDefined();
+		expect(result.goToTest()).toBe("/test");
+		expect(result.goToTest(1)).toBe("/test/1");
+	});
+
 	it("ignores path with *", () => {
 		const result = createRouteFunction(routingImpl, "/test/*.jpg" );
 		expect(result).toBeNull();

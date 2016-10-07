@@ -41,6 +41,8 @@ const router = <Router history={history}>
 	        <Route path=":clientId/order/:orderId" component={ClientOrder} />	        
 	        <Route path=":clientId/order/:orderId/status" component={ClientOrderStatus} />	        
 	    </Route>
+	    // optional path variables are supported, too
+	    <Route path="pony/(:foo)" component="{PonyFooContainer}" />	    
 </Router>
 
 // use the High Order Component (HOC) HiRouter
@@ -66,6 +68,8 @@ class ProductListContainer extends React.Component {
 		context.nav.goToClientOrderList(clientId) // from alias for customized naming
 		context.nav.goToClientOrder(clientId, orderId) // of course, multiple args!
 		context.nav.goToClientOrderStatus(clientId, orderId)		
+		context.nav.goToPony() // optional variables #1		
+		context.nav.goToPony('bam') // optional variables #2		
 		*/
 	}
 	

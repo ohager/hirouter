@@ -1,13 +1,15 @@
-import { firstLetterUpperCase } from "./utils";
+import { firstLetterUpperCase, purifyUrl } from "./utils";
 import analyzePath from './analyzePath';
 
 function createMountPathFunction(fn, pathInfo){
 
-	const urlTemplate = pathInfo.path.replace(/:(\w*)/g,'${$1}');
-	const body = 'return fn(`' + urlTemplate + '`)';
+	// this is damn smart!!!
+	const urlTemplate = pathInfo.path.replace(/\(?:(\w*)\)?/g,'${$1}');
+	const body = "return fn(purifyUrl(`"+ urlTemplate + "`))";
+
 	return 	pathInfo.variables.length > 0 ?
-		new Function('fn',pathInfo.variables, body).bind(null, fn) :
-		new Function('fn', body).bind(null, fn);
+		new Function('fn','purifyUrl', pathInfo.variables, body).bind(null, fn, purifyUrl) :
+		new Function('fn','purifyUrl', body).bind(null, fn, purifyUrl);
 
 }
 
@@ -29,7 +31,7 @@ function createRouteFunction(routingImpl, path, alias, opts = defaultOpts){
 	}
 	const funcName = `${opts.suffix}${name}`;
 	return {
-		[funcName]: createMountPathFunction.call(null, routingImpl, pathInfo )
+		[funcName]: createMountPathFunction( routingImpl, pathInfo )
 	}
 }
 

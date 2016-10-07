@@ -1,7 +1,7 @@
 import React from 'react';
 import Renderer from 'react-test-renderer';
 import {Router, IndexRoute, Route, createMemoryHistory as createHistory} from 'react-router';
-import {HiRouter} from '../modules/hirouter';
+import HiRouter from '../modules/hirouter';
 
 
 const AppComponent = React.createClass({
@@ -36,6 +36,22 @@ const AsteriskTestComponent = React.createClass({
 						{this.renderFuncNames()}
 					</ul>
 				</p>)
+	}
+});
+
+
+const OptionalVarTestComponent = React.createClass({
+	contextTypes: {
+		nav: React.PropTypes.any
+	},
+
+	render() {
+		return(
+		<ul>
+			<li>{this.context.nav.goToTest('pony')}</li>
+			<li>{this.context.nav.goToTest()}</li>
+		</ul>
+		)
 	}
 });
 
@@ -196,6 +212,40 @@ describe("HiRouter", () => {
 				<Route path="test/*" component={AsteriskTestComponent}/>
 				<Route path="test/*/foo" component={AsteriskTestComponent} alias="SomeName"/>
 				<Route path="**/*.jpg" component={AsteriskTestComponent}/>
+            </Route>
+		</Router>;
+
+		const tree = Renderer.create(<HiRouter router={router} options={testOptions}/>);
+		expect(tree).toMatchSnapshot();
+
+	});
+
+	it("considers optional '(:pony)' variable #1", () => {
+
+		var history = createHistory("/test/pony");
+		const testOptions = { routingImpl :  testRoutingImpl };
+
+		const router = <Router history={history}>
+            <Route path = '/' component={AppComponent} >
+				<Route path="test" component={OptionalVarTestComponent}/>
+				<Route path="test/(:id)" component={OptionalVarTestComponent}/>
+            </Route>
+		</Router>;
+
+		const tree = Renderer.create(<HiRouter router={router} options={testOptions}/>);
+		expect(tree).toMatchSnapshot();
+
+	});
+
+	it("considers optional '(:pony)' variable #2", () => {
+
+		var history = createHistory("/test");
+		const testOptions = { routingImpl :  testRoutingImpl };
+
+		const router = <Router history={history}>
+            <Route path = '/' component={AppComponent} >
+				<Route path="test" component={OptionalVarTestComponent}/>
+				<Route path="test/(:id)" component={OptionalVarTestComponent}/>
             </Route>
 		</Router>;
 
