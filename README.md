@@ -5,6 +5,10 @@
 # HiRouter
 __HiRouter__ is a React High Order Component for the famous React Router for a even better routing experience.
 
+```
+npm install react-hirouter --save
+```
+
 __HiRouter__ is capable to create convenience navigation functions.
 The idea is to keep the urls centralized (on your routers configuration) and using
 functions like _goToOrder(orderId)_ instead of pushing the URLs manually to the routers
