@@ -7,13 +7,13 @@ __HiRouter__ is a React High Order Component for the famous React Router for a e
 
 __HiRouter__ is capable to create convenience navigation functions.
 The idea is to keep the urls centralized (on your routers configuration) and using
-functions like _goToOrder(orderId)_ instead of pushing the URLs manually to the routers
-history (usually like this _router.push(\`/order/${orderId}\`)_ )
+functions like _goToOrder({orderId:1001})_ instead of pushing the URLs manually to the routers
+history (usually like this _router.push('/order/1001')_ )
 
 __HiRouter__ creates the navigation functions _automagically_, with arguments and names according to the
 route patterns, i.e.
 
-`bats/:hardly/hit/:balls/crazy` turns into `goToBatsHitCrazy(arg1, arg2)`
+`bats/:hardly/hit/:balls/crazy` turns into `goToBatsHitCrazy({hardly:value1, balls:value2})`
 
 Advantage:
  - Centralized route definitions (better maintainability)
@@ -60,16 +60,17 @@ class ProductListContainer extends React.Component {
 	handleSelectedProduct(id){
 	    // here we can conveniently navigate to the specific component
 	    // *without* knowing the underlying url.
-	    // mind, that the functions accept arguments according the routes pattern
-		context.nav.goToProduct(id);
+	    // mind, that the functions accept an object where its property 
+	    // names refers to variable names in the path pattern 
+		context.nav.goToProduct({id:id});
 		// also available are
 		/*
 		context.nav.goToIndex() // default		
-		context.nav.goToClientOrderList(clientId) // from alias for customized naming
-		context.nav.goToClientOrder(clientId, orderId) // of course, multiple args!
-		context.nav.goToClientOrderStatus(clientId, orderId)		
+		context.nav.goToClientOrderList({clientId: 100}) // from alias for customized naming
+		context.nav.goToClientOrder({clientId: 100, orderId:1001}) // of course, multiple args!
+		context.nav.goToClientOrderStatus({clientId: 100, orderId:1001})		
 		context.nav.goToPony() // optional variables #1		
-		context.nav.goToPony('bam') // optional variables #2		
+		context.nav.goToPony({foo:'bam'}) // optional variables #2		
 		*/
 	}
 	
@@ -93,7 +94,7 @@ __HiRouter__ allows some tweaking.
 Currently, options for function naming but also for routing internals are available.
 Available options are:
 
-- `suffix` : changes the first naming part of the navigation function
+- `prefix` : changes the first naming part of the navigation function
 - `defaultPath` : changes the second naming part of IndexRoute functions
 - `routingImpl`: a function used for routing (usually, you won't use this)
 
@@ -101,7 +102,7 @@ The default options are:
 
 ```js
 options : {
-    suffix : "goTo",
+    prefix : "goTo",
     defaultPath : "Index",
     routingImpl: (url) => { this.props.history.push(url); }
 }
@@ -120,7 +121,7 @@ const router =
   </Router>
 
 const options = {
-  suffix: "mazelTov",
+  prefix: "mazelTov",
   defaultPath: "TohuWaBohu"
 }
 
@@ -130,7 +131,7 @@ render( <HiRouter router={router} options={options}/>, document.getElementById('
 then HiRouter creates the following navigation functions:
 
 - `mazelTovTohuWaBohu()`
-- `mazelTovSchawarma(arg1)`
+- `mazelTovSchawarma({id:'bla'})`
 
 ### Routing Implementation Function
 

@@ -1,6 +1,6 @@
 {
   "name": "react-hirouter",
-  "version": "0.0.7a",
+  "version": "0.1.0-beta",
   "description": "A react-router High Order Component for more expressive routing",
   "jsnext:main": "es6/hirouter",
   "main": "lib/index",

@@ -1,20 +1,21 @@
 import { firstLetterUpperCase, purifyUrl } from "./utils";
 import analyzePath from './analyzePath';
 
-function createMountPathFunction(fn, pathInfo){
+function routeFunction(fn, pathInfo, obj){
 
-	// this is damn smart!!!
-	const urlTemplate = pathInfo.path.replace(/\(?:(\w*)\)?/g,'${$1}');
-	const body = "return fn(purifyUrl(`"+ urlTemplate + "`))";
+	let url = pathInfo.path;
 
-	return 	pathInfo.variables.length > 0 ?
-		new Function('fn','purifyUrl', pathInfo.variables, body).bind(null, fn, purifyUrl) :
-		new Function('fn','purifyUrl', body).bind(null, fn, purifyUrl);
+	pathInfo.variables.forEach( v => {
+		const pattern = `\\(?:${v}\\)?`;
+		const regex = new RegExp(pattern, 'ig');
+		url = url.replace(regex, (obj ? obj[v] : undefined));
+	});
 
+	return fn(purifyUrl(url))
 }
 
 const defaultOpts = {
-	suffix : "goTo",
+	prefix : "goTo",
 	defaultPath : "Index"
 };
 
@@ -29,9 +30,9 @@ function createRouteFunction(routingImpl, path, alias, opts = defaultOpts){
 	if(!name){
 		name = pathInfo.joinedTokens.length === 0 ? opts.defaultPath : pathInfo.joinedTokens;
 	}
-	const funcName = `${opts.suffix}${name}`;
+	const funcName = `${opts.prefix}${name}`;
 	return {
-		[funcName]: createMountPathFunction( routingImpl, pathInfo )
+		[funcName]: routeFunction.bind(null, routingImpl, pathInfo )
 	}
 }
 

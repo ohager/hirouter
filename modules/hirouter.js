@@ -4,7 +4,7 @@ import defaultRoutingImpl from './defaultRoutingImpl';
 import collectRoutes from './collectRoutes';
 
 const HiRouterOptionsShape = {
-	suffix : React.PropTypes.string,
+	prefix : React.PropTypes.string,
 	defaultPath : React.PropTypes.string
 };
 
@@ -22,7 +22,7 @@ const HiRouter = React.createClass({
 	getDefaultProps(){
 		return {
 			options : {
-				suffix : "goTo",
+				prefix : "goTo",
 				defaultPath : "Index",
 				routingImpl: defaultRoutingImpl
 			}

@@ -28,13 +28,13 @@ describe("create Route functions", () => {
 		let result = createRouteFunction(routingImpl, path);
 
 		expect(result.goToTest).toBeDefined();
-		expect(result.goToTest(100)).toBe("/test/100");
+		expect(result.goToTest({id: 100})).toBe("/test/100");
 
 		path = "/test/:id/details";
 		result = createRouteFunction(routingImpl, path);
 
 		expect(result.goToTestDetails).toBeDefined();
-		expect(result.goToTestDetails(100)).toBe("/test/100/details");
+		expect(result.goToTestDetails({id: 100})).toBe("/test/100/details");
 	});
 
 	it("with multiple uri variables", () => {
@@ -42,7 +42,7 @@ describe("create Route functions", () => {
 		const result = createRouteFunction(routingImpl, path);
 
 		expect(result.goToOrderProductDetails).toBeDefined();
-		expect(result.goToOrderProductDetails(1,"deadbeef")).toBe("/order/1/product/deadbeef/details");
+		expect(result.goToOrderProductDetails({id: 1, productId: "deadbeef"})).toBe("/order/1/product/deadbeef/details");
 	});
 
 	it("with alias", () => {
@@ -50,18 +50,18 @@ describe("create Route functions", () => {
 		const result = createRouteFunction(routingImpl, path, "Bestellung" );
 
 		expect(result.goToBestellung).toBeDefined();
-		expect(result.goToBestellung(1)).toBe("/order/1");
+		expect(result.goToBestellung({id: 1})).toBe("/order/1");
 	});
 
-	it("with options #1 (suffix)", () => {
+	it("with options #1 (prefix)", () => {
 		const path = "/order/:id";
 		const opts = {
-			suffix: "geheZu"
+			prefix: "geheZu"
 		};
 		const result = createRouteFunction(routingImpl, path, null, opts );
 
 		expect(result.geheZuOrder).toBeDefined();
-		expect(result.geheZuOrder(1)).toBe("/order/1");
+		expect(result.geheZuOrder({id: 1})).toBe("/order/1");
 	});
 
 	it("with options #2 (defaultPath)", () => {
@@ -79,7 +79,7 @@ describe("create Route functions", () => {
 
 		expect(result.goToTest).toBeDefined();
 		expect(result.goToTest()).toBe("/test");
-		expect(result.goToTest(1)).toBe("/test/1");
+		expect(result.goToTest({id: 1})).toBe("/test/1");
 	});
 
 	it("ignores path with *", () => {

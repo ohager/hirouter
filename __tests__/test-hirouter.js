@@ -48,7 +48,7 @@ const OptionalVarTestComponent = React.createClass({
 	render() {
 		return(
 		<ul>
-			<li>{this.context.nav.goToTest('pony')}</li>
+			<li>{this.context.nav.goToTest({pony:'foo'})}</li>
 			<li>{this.context.nav.goToTest()}</li>
 		</ul>
 		)
@@ -93,7 +93,7 @@ const MultipleTestComponent = React.createClass({
 		let urls = [];
 
 		urls.push(nav.goToTest());
-		urls.push(nav.goToTestOther(100));
+		urls.push(nav.goToTestOther({id:100}));
 
 		this.setState( {urls : urls } );
 	},
@@ -116,7 +116,7 @@ const AliasTestComponent = React.createClass({
 		let urls = [];
 
 		urls.push(nav.goToAlternative());
-		urls.push(nav.goToAlternative2(100));
+		urls.push(nav.goToAlternative2({id:100}));
 
 		this.setState( {urls : urls } );
 	},
@@ -222,13 +222,13 @@ describe("HiRouter", () => {
 
 	it("considers optional '(:pony)' variable #1", () => {
 
-		var history = createHistory("/test/pony");
+		var history = createHistory("/test/foo");
 		const testOptions = { routingImpl :  testRoutingImpl };
 
 		const router = <Router history={history}>
             <Route path = '/' component={AppComponent} >
 				<Route path="test" component={OptionalVarTestComponent}/>
-				<Route path="test/(:id)" component={OptionalVarTestComponent}/>
+				<Route path="test/(:pony)" component={OptionalVarTestComponent}/>
             </Route>
 		</Router>;
 
@@ -245,7 +245,7 @@ describe("HiRouter", () => {
 		const router = <Router history={history}>
             <Route path = '/' component={AppComponent} >
 				<Route path="test" component={OptionalVarTestComponent}/>
-				<Route path="test/(:id)" component={OptionalVarTestComponent}/>
+				<Route path="test/(:pony)" component={OptionalVarTestComponent}/>
             </Route>
 		</Router>;
 

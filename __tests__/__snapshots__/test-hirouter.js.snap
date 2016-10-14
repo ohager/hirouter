@@ -1,7 +1,7 @@
 exports[`HiRouter considers optional '(:pony)' variable #1 1`] = `
 <ul>
   <li>
-    /test/pony
+    /test/foo
   </li>
   <li>
     /test
@@ -12,7 +12,7 @@ exports[`HiRouter considers optional '(:pony)' variable #1 1`] = `
 exports[`HiRouter considers optional '(:pony)' variable #2 1`] = `
 <ul>
   <li>
-    /test/pony
+    /test/foo
   </li>
   <li>
     /test
