@@ -1,20 +1,20 @@
 {
-  "name": "nanoflux-react",
-  "version": "0.0.1",
-  "description": "Nanoflux bindings for ReactJS",
-  "jsnext:main": "es6/react-nanoflux",
+  "name": "react-hirouter",
+  "version": "0.1.0-beta",
+  "description": "A react-router High Order Component for more expressive routing",
+  "jsnext:main": "es6/hirouter",
   "main": "lib/index",
   "scripts": {
     "test-debug": "node %NODE_DEBUG_OPTION% node_modules/jest/bin/jest.js --runInBand",
     "test-local": "node node_modules/jest/bin/jest.js",
     "test": "node node_modules/jest/bin/jest.js && codecov",
     "build": "npm run build-cjs && npm run build-es",
-    "build-cjs": "rimraf lib && cross-env BABEL_ENV=cjs babel ./src -d lib --ignore '__tests__'",
-    "build-es": "rimraf es6 && cross-env BABEL_ENV=es babel ./src -d es6 --ignore '__tests__'"
+    "build-cjs": "rimraf lib && cross-env BABEL_ENV=cjs babel ./modules -d lib --ignore '__tests__'",
+    "build-es": "rimraf es6 && cross-env BABEL_ENV=es babel ./modules -d es6 --ignore '__tests__'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ohager/nanoflux-react.git"
+    "url": "git+https://github.com/ohager/hirouter.git"
   },
   "files": [
     "*.md",
@@ -26,20 +26,19 @@
     "collectCoverage": true
   },
   "keywords": [
+    "react-router",
     "react",
-    "nanoflux",
-    "nanoflux-fusion",
-    "flux",
-    "redux"
+    "routing",
+    "router"
   ],
   "author": "O. Häger",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ohager/nanoflux-react/issues"
+    "url": "https://github.com/ohager/hirouter/issues"
   },
-  "homepage": "https://github.com/ohager/nanoflux-react#readme",
+  "homepage": "https://github.com/ohager/hirouter#readme",
   "peerDependencies": {
-    "react": "^15.6.1"
+    "react-router" : "^2.7.0"
   },
   "devDependencies": {
     "babel-jest": "^15.0.0",
@@ -48,14 +47,11 @@
     "babel-preset-react": "^6.11.1",
     "codecov": "^1.0.1",
     "cross-env": "^2.0.1",
-    "enzyme": "^2.9.1",
     "jest": "^15.1.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1",
+    "react": "15.3.1",
+    "react-dom": "15.3.1",
+    "react-router": "^2.7.0",
+    "react-test-renderer": "^15.3.1",
     "rimraf": "^2.5.4"
-  },
-  "dependencies": {
-    "nanoflux": "^1.1.1"
   }
 }
